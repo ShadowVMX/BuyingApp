@@ -12,7 +12,8 @@ const TABS = [
   { id: 'lista',      label: 'Lista IA',    icon: '🤖' },
 ]
 
-const CONFIG_KEY = 'mercafit-config'
+const CONFIG_KEY  = 'mercafit-config'
+const RESULT_KEY  = 'mercafit-result'
 
 const defaultConfig = {
   apiKey: '',
@@ -31,9 +32,15 @@ function loadConfig() {
 export default function App() {
   const [activeTab, setActiveTab] = useState('dieta')
   const [config, setConfig] = useState(loadConfig)
-  const [aiResult,  setAiResult]  = useState(null)
-  const [aiLoading, setAiLoading] = useState(false)
-  const [aiError,   setAiError]   = useState(null)
+  const [aiResult,  setAiResultRaw] = useState(() => localStorage.getItem(RESULT_KEY) || null)
+  const [aiLoading, setAiLoading]  = useState(false)
+  const [aiError,   setAiError]    = useState(null)
+
+  const setAiResult = (val) => {
+    setAiResultRaw(val)
+    if (val) localStorage.setItem(RESULT_KEY, val)
+    else localStorage.removeItem(RESULT_KEY)
+  }
 
   const updateConfig = (updates) => {
     setConfig(prev => {
