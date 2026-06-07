@@ -17,8 +17,6 @@ const CONFIG_KEY = 'mercafit-config'
 const defaultConfig = {
   apiKey: '',
   budget: 600,
-  preferences: '',
-  exclusions: '',
 }
 
 function loadConfig() {

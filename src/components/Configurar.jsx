@@ -16,7 +16,7 @@ export default function Configurar({ config, onUpdate }) {
   return (
     <div>
       <h1 className="section-title">Configurar</h1>
-      <p className="section-sub">API Key, presupuesto y preferencias alimentarias</p>
+      <p className="section-sub">API Key y presupuesto</p>
 
       <div className="config-form">
         <div className="config-group">
@@ -82,28 +82,6 @@ export default function Configurar({ config, onUpdate }) {
             />
             <span className="budget-value">{config.budget}€</span>
           </div>
-        </div>
-
-        <div className="config-group">
-          <label className="config-label">Preferencias</label>
-          <p className="config-hint">Alimentos favoritos, forma de cocción, etc.</p>
-          <textarea
-            className="config-textarea"
-            placeholder="Ej: me gusta el arroz blanco, prefiero pollo a la plancha, incluye pasta..."
-            value={config.preferences}
-            onChange={handle('preferences')}
-          />
-        </div>
-
-        <div className="config-group">
-          <label className="config-label">Exclusiones</label>
-          <p className="config-hint">Alimentos que no quieres ver en la lista</p>
-          <textarea
-            className="config-textarea"
-            placeholder="Ej: sin gluten, sin marisco, sin frutos secos, sin cerdo..."
-            value={config.exclusions}
-            onChange={handle('exclusions')}
-          />
         </div>
 
         <button

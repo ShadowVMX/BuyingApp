@@ -43,7 +43,7 @@ CANTIDADES SEMANALES EXACTAS (7 días):
 - Pollo/pescado blanco/azul (cena): 1400 g
 - Verduras variadas: 1400 g mínimo
 - Aceite de oliva: 140 ml
-- Pasta integral o patatas (alternativa al pan): opcional${config.preferences ? `\nPreferencias: ${config.preferences}.` : ''}${config.exclusions ? `\nExcluir: ${config.exclusions}.` : ''}
+- Pasta integral o patatas (alternativa al pan): opcional
 
 Presupuesto: ${weeklyBudget}€/semana.
 
