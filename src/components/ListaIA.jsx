@@ -28,15 +28,32 @@ function Markdown({ text }) {
 }
 
 function buildPrompt(config, weeklyBudget) {
-  return `Lista de compra semanal Mercadona para dieta fitness alta en proteínas (5 comidas/día). Presupuesto: ${weeklyBudget}€/semana.${config.preferences ? ` Preferencias: ${config.preferences}.` : ''}${config.exclusions ? ` Excluir: ${config.exclusions}.` : ''}
+  return `Genera una lista de compra semanal de Mercadona España basada exactamente en esta dieta fija para 7 días:
 
-Busca precios actuales Mercadona España y responde en español con estos dos bloques:
+CANTIDADES SEMANALES EXACTAS (7 días):
+- Huevos enteros: 7 ud
+- Claras de huevo: 840 g
+- Pan de centeno: 840 g (desayuno) + 2240 g (comidas+cenas) = 3080 g total
+- Pavo natural lonchas: 420 g
+- Hummus: 420 g
+- Queso batido desnatado: 2800 g (media mañana + media tarde)
+- Fruta variada: 700 g
+- Nueces: 210 g
+- Pollo o pescado (comida): 1400 g
+- Pollo/pescado blanco/azul (cena): 1400 g
+- Verduras variadas: 1400 g mínimo
+- Aceite de oliva: 140 ml
+- Pasta integral o patatas (alternativa al pan): opcional${config.preferences ? `\nPreferencias: ${config.preferences}.` : ''}${config.exclusions ? `\nExcluir: ${config.exclusions}.` : ''}
+
+Presupuesto: ${weeklyBudget}€/semana.
+
+Busca precios actuales Mercadona España y responde en español con:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
-Productos por categoría (Proteínas, Lácteos/Huevos, Carbohidratos, Verduras/Frutas, Condimentos). Formato: producto — cantidad — precio.
+Solo los productos necesarios según las cantidades anteriores. Formato: producto — cantidad a comprar — precio.
 
 ## 💰 Resumen de Costes
-Subtotal por categoría, total semanal y comparativa con ${weeklyBudget}€.`
+Subtotal por categoría y total semanal comparado con ${weeklyBudget}€.`
 }
 
 export default function ListaIA({ config, result, setResult, loading, setLoading, error, setError }) {
