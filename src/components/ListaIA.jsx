@@ -30,30 +30,18 @@ function Markdown({ text }) {
 }
 
 function buildPrompt(config, weeklyBudget) {
-  return `Eres un experto en nutrición deportiva y en la tienda Mercadona España.
+  return `Lista de compra semanal Mercadona para dieta fitness alta en proteínas (5 comidas/día). Presupuesto: ${weeklyBudget}€/semana.${config.preferences ? ` Preferencias: ${config.preferences}.` : ''}${config.exclusions ? ` Excluir: ${config.exclusions}.` : ''}
 
-La dieta del atleta es alta en proteínas, estructurada en 5 comidas al día (desayuno, media mañana, comida, media tarde, cena), enfocada en rendimiento y composición corporal.
-
-CONTEXTO DEL USUARIO:
-- Presupuesto semanal disponible: ~${weeklyBudget}€ (${config.budget}€/mes)
-${config.preferences ? `- Preferencias alimentarias: ${config.preferences}` : ''}
-${config.exclusions   ? `- Alimentos excluidos: ${config.exclusions}`        : ''}
-
-Usa web search para verificar precios actuales reales de productos en Mercadona España y genera una respuesta en español con exactamente estos tres bloques:
+Busca precios actuales Mercadona España y responde con estos tres bloques en español:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
-
-Lista completa de los productos necesarios para cubrir las 5 comidas diarias durante 7 días. Para cada producto incluye: nombre exacto del producto en Mercadona, cantidad necesaria para la semana y precio estimado actual. Organiza por categorías: Proteínas, Lácteos y Huevos, Carbohidratos, Verduras y Frutas, Aceites y Condimentos.
+Productos por categoría (Proteínas, Lácteos/Huevos, Carbohidratos, Verduras/Frutas, Condimentos). Formato: producto — cantidad — precio.
 
 ## 💰 Resumen de Costes
-
-Coste subtotal por categoría. Coste total semanal. Indica si entra dentro del presupuesto de ${weeklyBudget}€/semana o cuánto se excede/ahorra.
+Subtotal por categoría, total semanal y comparativa con ${weeklyBudget}€.
 
 ## 📅 Menú 3 Días de Ejemplo
-
-Menú completo de 3 días usando únicamente los productos de la lista. Para cada día incluye las 5 comidas con cantidades. Al final de cada día indica los macros totales estimados: calorías totales, proteínas (g), carbohidratos (g) y grasas (g).
-
-Usa precios reales actuales de Mercadona España. Sé específico con los nombres de los productos.`
+5 comidas/día con cantidades y macros diarios (kcal, P, C, G).`
 }
 
 export default function ListaIA({ config }) {
@@ -85,9 +73,9 @@ export default function ListaIA({ config }) {
           'anthropic-dangerous-direct-browser-access': 'true',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 4096,
-          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 800,
+          tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 1 }],
           messages: [{ role: 'user', content: buildPrompt(config, weeklyBudget) }],
         }),
       })
