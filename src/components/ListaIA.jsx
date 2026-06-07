@@ -67,6 +67,7 @@ export default function ListaIA({ config, result, setResult, loading, setLoading
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 800,
           tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 1 }],
+          tool_choice: { type: 'any' },
           messages: [{ role: 'user', content: buildPrompt(config, weeklyBudget) }],
         }),
       })
