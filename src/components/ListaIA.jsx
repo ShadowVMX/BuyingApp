@@ -27,32 +27,32 @@ function Markdown({ text }) {
   )
 }
 
-function buildPrompt(config, weeklyBudget) {
-  return `Genera una lista de compra semanal de Mercadona España basada exactamente en esta dieta fija para 7 días:
+function buildPrompt(_config, weeklyBudget) {
+  return `Genera una lista de compra semanal de Mercadona España para esta dieta fitness (7 días). Usa web search para precios de referencia actuales. Si algún precio no aparece exacto, usa una estimación razonable de supermercado español. Genera SIEMPRE la lista completa, nunca la rechaces.
 
-CANTIDADES SEMANALES EXACTAS (7 días):
-- Huevos enteros: 7 ud
-- Claras de huevo: 840 g
-- Pan de centeno: 840 g (desayuno) + 2240 g (comidas+cenas) = 3080 g total
-- Pavo natural lonchas: 420 g
+CANTIDADES EXACTAS PARA 7 DÍAS:
+Proteínas:
+- Huevos enteros: 7 ud → 2 paquetes de 6
+- Claras líquidas: 840 g → 1 botella de 1 L
+- Pavo natural en lonchas: 420 g
+- Pollo + pescado blanco + pescado azul: 2.800 g en total (repartir entre los tres)
+Lácteos:
+- Queso batido desnatado: 2.800 g → 3 envases de 1 kg
+Pan:
+- Pan de centeno: 3.080 g → 4 panes
+Otros:
 - Hummus: 420 g
-- Queso batido desnatado: 2800 g (media mañana + media tarde)
-- Fruta variada: 700 g
 - Nueces: 210 g
-- Pollo o pescado (comida): 1400 g
-- Pollo/pescado blanco/azul (cena): 1400 g
-- Verduras variadas: 1400 g mínimo
 - Aceite de oliva: 140 ml
-- Pasta integral o patatas (alternativa al pan): opcional
+- Fruta variada: 700 g
+- Verduras variadas: 1.400 g mínimo
 
 Presupuesto: ${weeklyBudget}€/semana.
-
-Usa web search para obtener precios de referencia en Mercadona España. Después genera SIEMPRE la lista completa: si algún precio no aparece exacto en los resultados, usa una estimación razonable basada en precios típicos de supermercado español. Nunca rechaces ni dejes la lista incompleta.
 
 Responde en español con estos dos bloques y nada más:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
-Productos según las cantidades anteriores. Formato: producto — cantidad a comprar — precio estimado.
+Formato por producto: nombre — cantidad a comprar — precio estimado.
 
 ## 💰 Resumen de Costes
 Subtotal por categoría y total semanal comparado con ${weeklyBudget}€.`
