@@ -128,6 +128,21 @@ input, textarea { font: inherit; }
 .tab-icon  { font-size: 16px; }
 .tab-label { font-size: 10px; letter-spacing: 0.04em; }
 
+.tab-loading-dot {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(.7); }
+}
+
 /* ── Content area ───────────────────────────────────────── */
 .app-content {
   flex: 1;

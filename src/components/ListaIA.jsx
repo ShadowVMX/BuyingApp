@@ -32,23 +32,16 @@ function Markdown({ text }) {
 function buildPrompt(config, weeklyBudget) {
   return `Lista de compra semanal Mercadona para dieta fitness alta en proteínas (5 comidas/día). Presupuesto: ${weeklyBudget}€/semana.${config.preferences ? ` Preferencias: ${config.preferences}.` : ''}${config.exclusions ? ` Excluir: ${config.exclusions}.` : ''}
 
-Busca precios actuales Mercadona España y responde con estos tres bloques en español:
+Busca precios actuales Mercadona España y responde en español con estos dos bloques:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
 Productos por categoría (Proteínas, Lácteos/Huevos, Carbohidratos, Verduras/Frutas, Condimentos). Formato: producto — cantidad — precio.
 
 ## 💰 Resumen de Costes
-Subtotal por categoría, total semanal y comparativa con ${weeklyBudget}€.
-
-## 📅 Menú 3 Días de Ejemplo
-5 comidas/día con cantidades y macros diarios (kcal, P, C, G).`
+Subtotal por categoría, total semanal y comparativa con ${weeklyBudget}€.`
 }
 
-export default function ListaIA({ config }) {
-  const [result,  setResult]  = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error,   setError]   = useState(null)
-
+export default function ListaIA({ config, result, setResult, loading, setLoading, error, setError }) {
   const weeklyBudget = Math.round(config.budget / 4.3)
   const hasKey = Boolean(config.apiKey?.trim())
 

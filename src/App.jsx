@@ -33,6 +33,9 @@ function loadConfig() {
 export default function App() {
   const [activeTab, setActiveTab] = useState('dieta')
   const [config, setConfig] = useState(loadConfig)
+  const [aiResult,  setAiResult]  = useState(null)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiError,   setAiError]   = useState(null)
 
   const updateConfig = (updates) => {
     setConfig(prev => {
@@ -61,6 +64,7 @@ export default function App() {
           >
             <span className="tab-icon">{tab.icon}</span>
             <span className="tab-label">{tab.label}</span>
+            {tab.id === 'lista' && aiLoading && <span className="tab-loading-dot" />}
           </button>
         ))}
       </nav>
@@ -69,7 +73,14 @@ export default function App() {
         {activeTab === 'dieta'       && <MiDieta />}
         {activeTab === 'suplementos' && <Suplementos />}
         {activeTab === 'configurar'  && <Configurar config={config} onUpdate={updateConfig} />}
-        {activeTab === 'lista'       && <ListaIA config={config} />}
+        {activeTab === 'lista'       && (
+          <ListaIA
+            config={config}
+            result={aiResult}   setResult={setAiResult}
+            loading={aiLoading} setLoading={setAiLoading}
+            error={aiError}     setError={setAiError}
+          />
+        )}
       </main>
     </div>
   )
