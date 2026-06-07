@@ -24,7 +24,7 @@ Hacerlo todo en un solo bloque secuencial. No esperar confirmación entre pasos.
 
 - Endpoint: `https://api.anthropic.com/v1/messages`
 - Modelo: `claude-haiku-4-5-20251001`
-- `max_tokens`: 800
+- `max_tokens`: 1500
 - `tool_choice: { type: 'any' }` — forzar uso de web_search
 - La API key vive solo en `localStorage`, nunca en el repo
 
