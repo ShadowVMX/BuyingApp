@@ -37,7 +37,7 @@ export default function MiDieta() {
   return (
     <div>
       <h1 className="section-title">Mi Dieta</h1>
-      <p className="section-sub">Protocolo Juanma · DavFit</p>
+      <p className="section-sub">Dieta semanal</p>
       <div className="meals-list">
         {meals.map(meal => (
           <MealBlock key={meal.id} meal={meal} />
