@@ -30,7 +30,7 @@ function Markdown({ text }) {
 }
 
 function buildPrompt(_config, weeklyBudget) {
-  return `Genera una lista de compra semanal de Mercadona España para esta dieta fitness (7 días). Usa web search para precios de referencia actuales. Si algún precio no aparece exacto, usa una estimación razonable de supermercado español. Genera SIEMPRE la lista completa, nunca la rechaces.
+  return `Busca precios actuales en tulistadelmerca.es para los productos de esta lista. Si no encuentras alguno, usa estimación razonable de Mercadona España.
 
 CANTIDADES EXACTAS PARA 7 DÍAS:
 Proteínas:
@@ -38,10 +38,13 @@ Proteínas:
 - Claras líquidas: 840 g → 1 botella de 1 L
 - Pavo natural en lonchas: 420 g
 - Pollo + pescado blanco + pescado azul: 2.800 g en total (repartir entre los tres)
+
 Lácteos:
 - Queso batido desnatado: 2.800 g → 3 envases de 1 kg
+
 Pan:
 - Pan de centeno: 3.080 g → 4 panes
+
 Otros:
 - Hummus: 420 g
 - Nueces: 210 g
@@ -54,7 +57,7 @@ Presupuesto: ${weeklyBudget}€/semana.
 Responde en español con estos dos bloques y nada más:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
-Formato por producto: nombre — cantidad a comprar — precio estimado.
+Formato por producto: nombre — cantidad a comprar — precio€
 
 ## 💰 Resumen de Costes
 Subtotal por categoría y total semanal comparado con ${weeklyBudget}€.`
