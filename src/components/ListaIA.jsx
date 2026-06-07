@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function parseInline(text) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
   return parts.map((part, i) =>
@@ -58,9 +60,38 @@ Formato por producto: nombre — cantidad a comprar — precio estimado.
 Subtotal por categoría y total semanal comparado con ${weeklyBudget}€.`
 }
 
+function toPlainText(markdown) {
+  const date = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })
+  const lines = markdown.split('\n').map(line => {
+    if (line.startsWith('## ')) return `\n${line.slice(3).toUpperCase()}\n${'─'.repeat(32)}`
+    if (line.startsWith('### ')) return `\n${line.slice(4)}`
+    if (/^[-*•] /.test(line)) return `□  ${line.replace(/^[-*•] /, '').replace(/\*\*/g, '')}`
+    if (/^\d+\. /.test(line)) return `□  ${line.replace(/^\d+\. /, '').replace(/\*\*/g, '')}`
+    return line.replace(/\*\*/g, '')
+  })
+  return `LISTA DE COMPRA — MERCADONA\n${date}\n${'═'.repeat(32)}\n${lines.join('\n').trim()}`
+}
+
 export default function ListaIA({ config, result, setResult, loading, setLoading, error, setError }) {
+  const [copied, setCopied] = useState(false)
   const weeklyBudget = Math.round(config.budget / 4.3)
   const hasKey = Boolean(config.apiKey?.trim())
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(toPlainText(result))
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleDownload = () => {
+    const blob = new Blob([toPlainText(result)], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'lista-mercafit.txt'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
 
   const generate = async () => {
     if (!hasKey) {
@@ -171,9 +202,19 @@ export default function ListaIA({ config, result, setResult, loading, setLoading
       )}
 
       {result && (
-        <div className="result-box">
-          <Markdown text={result} />
-        </div>
+        <>
+          <div className="export-row">
+            <button className="export-btn" onClick={handleCopy} type="button">
+              {copied ? '✓ Copiado' : '📋 Copiar lista'}
+            </button>
+            <button className="export-btn" onClick={handleDownload} type="button">
+              ⬇ Descargar .txt
+            </button>
+          </div>
+          <div className="result-box">
+            <Markdown text={result} />
+          </div>
+        </>
       )}
     </div>
   )
