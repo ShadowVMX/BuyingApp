@@ -65,7 +65,7 @@ function toPlainText(markdown) {
 }
 
 function buildPrompt(_config, weeklyBudget) {
-  return `Busca precios en tulistadelmerca.es para cada producto. Si encuentras el precio exacto, úsalo. Si no lo encuentras, usa una estimación razonable de Mercadona España. Genera SIEMPRE la lista completa con todos los productos y un precio para cada uno — nunca rechaces ni dejes la lista incompleta.
+  return `Busca precios actuales de Mercadona España para cada producto de esta lista. Si no encuentras alguno, usa una estimación razonable de supermercado español. Genera SIEMPRE la lista completa con un precio para cada producto — nunca rechaces ni dejes la lista incompleta.
 
 CANTIDADES EXACTAS PARA 7 DÍAS:
 Proteínas:
@@ -224,7 +224,7 @@ export default function ListaIA({ config, result, setResult, loading, setLoading
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 1500,
-          tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 1 }],
+          tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 3 }],
           tool_choice: { type: 'any' },
           messages: [{ role: 'user', content: buildPrompt(config, weeklyBudget) }],
         }),
