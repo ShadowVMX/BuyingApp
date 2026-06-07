@@ -47,10 +47,12 @@ CANTIDADES SEMANALES EXACTAS (7 días):
 
 Presupuesto: ${weeklyBudget}€/semana.
 
-Busca precios actuales Mercadona España y responde en español con:
+Usa web search para obtener precios de referencia en Mercadona España. Después genera SIEMPRE la lista completa: si algún precio no aparece exacto en los resultados, usa una estimación razonable basada en precios típicos de supermercado español. Nunca rechaces ni dejes la lista incompleta.
+
+Responde en español con estos dos bloques y nada más:
 
 ## 🛒 Lista de Compra Semanal — Mercadona
-Solo los productos necesarios según las cantidades anteriores. Formato: producto — cantidad a comprar — precio.
+Productos según las cantidades anteriores. Formato: producto — cantidad a comprar — precio estimado.
 
 ## 💰 Resumen de Costes
 Subtotal por categoría y total semanal comparado con ${weeklyBudget}€.`
