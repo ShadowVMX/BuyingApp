@@ -30,7 +30,7 @@ function Markdown({ text }) {
 }
 
 function buildPrompt(_config, weeklyBudget) {
-  return `Busca precios actuales en tulistadelmerca.es para los productos de esta lista. Si no encuentras alguno, usa estimación razonable de Mercadona España.
+  return `Para cada producto de esta lista, busca en tulistadelmerca.es/productos-mercadona/[nombre-producto] y lee el precio exacto de la página. No uses estimaciones si encuentras el precio real.
 
 CANTIDADES EXACTAS PARA 7 DÍAS:
 Proteínas:
